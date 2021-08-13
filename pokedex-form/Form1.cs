@@ -19,6 +19,11 @@ namespace pokedex_form
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            cargar();
+        }
+
+        private void cargar()
+        {
             //Cargar la grilla con pokemons desde la DB
             PokemonNegocio negocio = new PokemonNegocio();
             try
@@ -35,13 +40,19 @@ namespace pokedex_form
             {
                 MessageBox.Show(ex.ToString());
             }
-
         }
 
         private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
         {
             Pokemon poke = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
             pbxPokemon.Load(poke.UrlImagen);
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmPokemon ventanaNuevo = new frmPokemon();
+            ventanaNuevo.ShowDialog();
+            cargar();
         }
     }
 }

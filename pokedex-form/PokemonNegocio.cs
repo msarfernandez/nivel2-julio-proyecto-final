@@ -43,8 +43,32 @@ namespace pokedex_form
             {
                 throw ex;
             }
+        }
 
+        public void agregar(Pokemon pokemon)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
 
+            try
+            {
+                conexion.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true";
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.Connection = conexion;
+
+                comando.CommandText = "Insert into POKEMONS Values (" + pokemon.Numero + ", '" + pokemon.Nombre + "', '" + pokemon.Descripcion + "', '" + pokemon.UrlImagen + "', 1, 1,null, 1)";
+
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
         }
     }
 }

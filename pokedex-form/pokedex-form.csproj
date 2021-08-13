@@ -53,12 +53,21 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPokemon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPokemon.Designer.cs">
+      <DependentUpon>frmPokemon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pokemon.cs" />
     <Compile Include="PokemonNegocio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPokemon.resx">
+      <DependentUpon>frmPokemon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
