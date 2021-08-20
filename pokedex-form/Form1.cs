@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using modelo;
+using negocio;
+using System.IO;
 
 namespace pokedex_form
 {
@@ -44,8 +47,15 @@ namespace pokedex_form
 
         private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
         {
-            Pokemon poke = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
-            pbxPokemon.Load(poke.UrlImagen);
+            try
+            {
+                Pokemon poke = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+                pbxPokemon.Load(poke.UrlImagen);                
+            }
+            catch (FileNotFoundException ex)
+            {
+                pbxPokemon.Load("https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png?w=640");
+            }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)

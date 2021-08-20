@@ -40,16 +40,16 @@ namespace pokedex_form
             // 
             this.dgvPokemons.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dgvPokemons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPokemons.Location = new System.Drawing.Point(12, 50);
+            this.dgvPokemons.Location = new System.Drawing.Point(12, 56);
             this.dgvPokemons.Name = "dgvPokemons";
-            this.dgvPokemons.Size = new System.Drawing.Size(464, 300);
+            this.dgvPokemons.Size = new System.Drawing.Size(611, 300);
             this.dgvPokemons.TabIndex = 0;
             this.dgvPokemons.SelectionChanged += new System.EventHandler(this.dgvPokemons_SelectionChanged);
             // 
             // pbxPokemon
             // 
             this.pbxPokemon.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pbxPokemon.Location = new System.Drawing.Point(482, 50);
+            this.pbxPokemon.Location = new System.Drawing.Point(629, 56);
             this.pbxPokemon.Name = "pbxPokemon";
             this.pbxPokemon.Size = new System.Drawing.Size(300, 300);
             this.pbxPokemon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -64,7 +64,7 @@ namespace pokedex_form
             this.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Turquoise;
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.Location = new System.Drawing.Point(12, 356);
+            this.btnAgregar.Location = new System.Drawing.Point(12, 362);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(116, 48);
             this.btnAgregar.TabIndex = 2;
@@ -76,7 +76,7 @@ namespace pokedex_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(839, 416);
+            this.ClientSize = new System.Drawing.Size(950, 454);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.pbxPokemon);
             this.Controls.Add(this.dgvPokemons);

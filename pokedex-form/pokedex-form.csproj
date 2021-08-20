@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Elemento.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,8 +58,6 @@
     <Compile Include="frmPokemon.Designer.cs">
       <DependentUpon>frmPokemon.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pokemon.cs" />
-    <Compile Include="PokemonNegocio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -93,6 +90,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="script_db\POKEDEX_DB.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\modelo\modelo.csproj">
+      <Project>{c55507cd-eb59-4f3d-a683-044600386216}</Project>
+      <Name>modelo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\negocio\negocio.csproj">
+      <Project>{b72d9351-27bc-49de-9483-892e4928dc71}</Project>
+      <Name>negocio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

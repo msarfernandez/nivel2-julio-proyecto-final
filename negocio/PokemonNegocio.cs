@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using modelo;
 
-namespace pokedex_form
+namespace negocio
 {
-    class PokemonNegocio
+    public class PokemonNegocio
     {
         public List<Pokemon> listar()
         {
@@ -19,7 +20,8 @@ namespace pokedex_form
             {
                 conexion.ConnectionString = "data source=.\\SQLEXPRESS; initial catalog=POKEDEX_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select nombre, descripcion, Numero, UrlImagen from pokemons";
+                //comando.CommandText = "select nombre, descripcion, Numero, UrlImagen from pokemons";
+                comando.CommandText = "select nombre, p.descripcion, Numero, UrlImagen, t.Descripcion as tipo, d.Descripcion as debilidad from pokemons p, elementos t, elementos d where p.IdTipo = t.Id and p.IdDebilidad = d.Id";
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -32,6 +34,10 @@ namespace pokedex_form
                     aux.Descripcion = (string)lector["descripcion"];
                     aux.Numero = lector.GetInt32(2);
                     aux.UrlImagen = (string)lector["UrlImagen"];
+                    aux.Tipo = new Elemento();
+                    aux.Tipo.Descripcion = (string)lector["tipo"];
+                    aux.Debilidad = new Elemento();
+                    aux.Debilidad.Descripcion = (string)lector["debilidad"];
 
                     lista.Add(aux);
                 }
@@ -56,7 +62,9 @@ namespace pokedex_form
                 comando.CommandType = System.Data.CommandType.Text;
                 comando.Connection = conexion;
 
-                comando.CommandText = "Insert into POKEMONS Values (" + pokemon.Numero + ", '" + pokemon.Nombre + "', '" + pokemon.Descripcion + "', '" + pokemon.UrlImagen + "', 1, 1,null, 1)";
+                comando.CommandText = "Insert into POKEMONS Values (" + pokemon.Numero + ", '" + pokemon.Nombre + "', '" + pokemon.Descripcion + "', '" + pokemon.UrlImagen + "', @idTipo, @idDebilidad,null, 1)";
+                comando.Parameters.AddWithValue("@idTipo", pokemon.Tipo.Id);
+                comando.Parameters.AddWithValue("@idDebilidad", pokemon.Debilidad.Id);
 
                 conexion.Open();
                 comando.ExecuteNonQuery();
