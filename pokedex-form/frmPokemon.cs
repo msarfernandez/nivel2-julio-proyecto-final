@@ -14,9 +14,15 @@ namespace pokedex_form
 {
     public partial class frmPokemon : Form
     {
+        private Pokemon pokemon = null;
         public frmPokemon()
         {
             InitializeComponent();
+        }
+        public frmPokemon(Pokemon pokemon)
+        {
+            InitializeComponent();
+            this.pokemon = pokemon;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -26,21 +32,31 @@ namespace pokedex_form
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Pokemon nuevo = new Pokemon();
+            //Pokemon nuevo = new Pokemon();
             PokemonNegocio negocio = new PokemonNegocio();
             try
             {
-                nuevo.Numero = (int)numNumero.Value;
-                nuevo.Nombre = txtNombre.Text;
-                nuevo.Descripcion = txtDescripcion.Text;
-                nuevo.UrlImagen = txtUrlImagen.Text;
+                if (pokemon == null)
+                    pokemon = new Pokemon();
 
-                nuevo.Tipo = (Elemento)cboTipo.SelectedItem;
-                nuevo.Debilidad = (Elemento)cboDebilidad.SelectedItem;
+                pokemon.Numero = (int)numNumero.Value;
+                pokemon.Nombre = txtNombre.Text;
+                pokemon.Descripcion = txtDescripcion.Text;
+                pokemon.UrlImagen = txtUrlImagen.Text;
+                
+                pokemon.Tipo = (Elemento)cboTipo.SelectedItem;
+                pokemon.Debilidad = (Elemento)cboDebilidad.SelectedItem;
 
-                negocio.agregar(nuevo);
-
-                MessageBox.Show("Pokemon agregado exitosamente");
+                if(pokemon.Id != 0)
+                {
+                    negocio.modificar(pokemon);
+                    MessageBox.Show("Pokemon modificado exitosamente");
+                }
+                else
+                {
+                    negocio.agregar(pokemon);
+                    MessageBox.Show("Pokemon agregado exitosamente");
+                }
                 Close();
             }
             catch (Exception ex)
@@ -55,7 +71,23 @@ namespace pokedex_form
             try
             {
                 cboTipo.DataSource = elementoNegocio.listar();
+                cboTipo.ValueMember = "Id";
+                cboTipo.DisplayMember = "Descripcion";
+
                 cboDebilidad.DataSource = elementoNegocio.listar();
+                cboDebilidad.ValueMember = "Id";
+                cboDebilidad.DisplayMember = "Descripcion";
+
+                if (pokemon != null)
+                {
+                    numNumero.Value = pokemon.Numero;
+                    txtNombre.Text = pokemon.Nombre;
+                    txtDescripcion.Text = pokemon.Descripcion;
+                    txtUrlImagen.Text = pokemon.UrlImagen;
+                    cboTipo.SelectedValue = pokemon.Tipo.Id;
+                    cboDebilidad.SelectedValue = pokemon.Debilidad.Id;
+                }
+                
             }
             catch (Exception ex)
             {

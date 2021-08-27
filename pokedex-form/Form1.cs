@@ -15,13 +15,14 @@ namespace pokedex_form
 {
     public partial class Form1 : Form
     {
+        private List<Pokemon> listaPokemons;
         public Form1()
         {
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
+        {            
             cargar();
         }
 
@@ -31,13 +32,13 @@ namespace pokedex_form
             PokemonNegocio negocio = new PokemonNegocio();
             try
             {
-                List<Pokemon> listaObtenida = negocio.listar();
+                listaPokemons = negocio.listar();
 
-                dgvPokemons.DataSource = listaObtenida;
+                dgvPokemons.DataSource = listaPokemons;
                 dgvPokemons.Columns[0].Visible = false;
                 dgvPokemons.Columns[4].Visible = false;
 
-                pbxPokemon.Load(listaObtenida[0].UrlImagen);
+                pbxPokemon.Load(listaPokemons[0].UrlImagen);
             }
             catch (Exception ex)
             {
@@ -49,8 +50,11 @@ namespace pokedex_form
         {
             try
             {
-                Pokemon poke = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
-                pbxPokemon.Load(poke.UrlImagen);                
+                if(dgvPokemons.SelectedRows.Count != 0)
+                {
+                    Pokemon poke = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+                    pbxPokemon.Load(poke.UrlImagen);                
+                }
             }
             catch (FileNotFoundException ex)
             {
@@ -63,6 +67,81 @@ namespace pokedex_form
             frmPokemon ventanaNuevo = new frmPokemon();
             ventanaNuevo.ShowDialog();
             cargar();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Pokemon seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+            frmPokemon ventanaNuevo = new frmPokemon(seleccionado);
+            ventanaNuevo.ShowDialog();
+            cargar();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            PokemonNegocio negocio = new PokemonNegocio();
+            Pokemon seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+            try
+            {
+                if(MessageBox.Show("De verdad lo querés eliminar? Se pierde eh...", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    negocio.eliminarFisico(seleccionado.Id);
+                    cargar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo eliminar... " + ex.ToString());
+            }
+
+        }
+
+        private void btnEliminarDos_Click(object sender, EventArgs e)
+        {
+            PokemonNegocio negocio = new PokemonNegocio();
+            Pokemon seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+            try
+            {
+                if (MessageBox.Show("De verdad lo querés eliminar? Se pierde eh...", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    negocio.eliminarLogico(seleccionado.Id);
+                    cargar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo eliminar... " + ex.ToString());
+            }
+        }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            filtro();
+        }
+
+        private void txtFiltro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            filtro();
+        }
+
+        private void filtro()
+        {
+            string filtro = txtFiltro.Text;
+
+            if (filtro == "" || filtro.Length<=2)
+            {
+                dgvPokemons.DataSource = null;
+                dgvPokemons.DataSource = listaPokemons;
+            }
+            else
+            {
+                List<Pokemon> listaFiltrada = listaPokemons.FindAll(x => x.Descripcion.ToUpper().Contains(filtro.ToUpper()) || x.Nombre.ToUpper().Contains(filtro.ToUpper()));
+                dgvPokemons.DataSource = null;
+                dgvPokemons.DataSource = listaFiltrada;
+            }
+
+            dgvPokemons.Columns[0].Visible = false;
+            dgvPokemons.Columns[4].Visible = false;
         }
     }
 }

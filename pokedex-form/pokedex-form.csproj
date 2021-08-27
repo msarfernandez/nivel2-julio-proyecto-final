@@ -52,11 +52,29 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmEntrenadores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEntrenadores.Designer.cs">
+      <DependentUpon>frmEntrenadores.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPokemon.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPokemon.Designer.cs">
       <DependentUpon>frmPokemon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrincipal.Designer.cs">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTipos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTipos.Designer.cs">
+      <DependentUpon>frmTipos.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,6 +83,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPokemon.resx">
       <DependentUpon>frmPokemon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTipos.resx">
+      <DependentUpon>frmTipos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

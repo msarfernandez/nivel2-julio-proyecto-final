@@ -58,7 +58,7 @@ namespace pokedex_form
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(64, 68);
+            this.lblNombre.Location = new System.Drawing.Point(64, 64);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(47, 13);
             this.lblNombre.TabIndex = 1;
@@ -168,7 +168,7 @@ namespace pokedex_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(327, 311);
+            this.ClientSize = new System.Drawing.Size(327, 290);
             this.Controls.Add(this.cboDebilidad);
             this.Controls.Add(this.lblDebilidad);
             this.Controls.Add(this.cboTipo);
